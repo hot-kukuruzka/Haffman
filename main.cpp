@@ -43,7 +43,6 @@ void min_min(Forest forest[], int _size, int &pos1, int &pos2) {
 }
 
 int32_t main(int argc, char *argv[]) {
-    int i, cnt, all_bytes;
     if (!strcmp("encode", argv[1])) {
         f1 = fopen(argv[3], "rb");
         f2 = fopen(argv[2], "wb");
@@ -109,8 +108,8 @@ int32_t main(int argc, char *argv[]) {
             cnt += freq_t[tree[i].symbol];
         }
         all_bytes = (all_bytes + 7) / 8;
-
-
+        fprintf(f2, "%d\n", all_bytes);
+        fprintf(f2, "%d\n", cnt);
         f1 = fopen(argv[3], "rb");
         unsigned char byte = 0;
         int cnt_of_byte = 0;
@@ -138,16 +137,16 @@ int32_t main(int argc, char *argv[]) {
         fclose(f2);
     } else {
         // дальше вроде как разархиватор
-
         f1 = fopen(argv[2], "rb");
         f2 = fopen(argv[3], "w");
-        int size_tree;
+        int size_tree, all_bytes, cnt, i;
         unsigned char chc;
         Tree tr[511];
 
         fscanf(f1, "%d\n", &size_tree);
         for (i = 0; i < size_tree; i++) fscanf(f1, "%d %d %d %d\n", &tr[i].left, &tr[i].right, &tr[i].parent, &tr[i].symbol);
-
+        fscanf(f1, "%d\n", &all_bytes);
+        fscanf(f1, "%d\n", &cnt);
         int cur_index = size_tree - 1;
         for (i = 0; i < all_bytes; i++) {
             unsigned char maska = 128;
@@ -169,4 +168,3 @@ int32_t main(int argc, char *argv[]) {
     }
     return 0;
 }
-
