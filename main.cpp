@@ -136,7 +136,7 @@ int32_t main(int argc, char *argv[]) {
         fclose(f1);
         fclose(f2);
     } else {
-        // дальше вроде как разархиватор
+        // разархиватор
         f1 = fopen(argv[2], "rb");
         f2 = fopen(argv[3], "w");
         int size_tree, all_bytes, cnt, i;
